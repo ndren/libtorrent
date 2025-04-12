@@ -98,10 +98,9 @@ Tracker::disable() {
       return;
 
     m_worker->m_state.m_flags &= ~tracker::TrackerState::flag_enabled;
+    m_worker->close();
   }
-
-  // TODO: Should this lock?
-  m_worker->close();
+  
 
   if (m_worker->m_slot_disabled)
     m_worker->m_slot_disabled();
